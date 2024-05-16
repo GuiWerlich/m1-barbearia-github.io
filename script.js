@@ -17,69 +17,65 @@ const barbearia = {
     estaAberto: true,
 };
 
-cortes = barbearia.cortes
-barbas = barbearia.barbas
-
-
 function buscaCortePorId(id) {
+    const cortes = barbearia.cortes;
     for (let i = 0; i < cortes.length; i++) {
         if (cortes[i].id === id) {
-            nomeCorte = cortes[i]
-            return nomeCorte
+            return cortes[i];
         }
     } 
     return "Corte não encontrado";
-
 }
 
-
 function buscaBarbaPorId(id) {
+    const barbas = barbearia.barbas;
     for (let i = 0; i < barbas.length; i++) {
         if (barbas[i].id === id) {
-            nomeBarba = barbas[i]
-            return nomeBarba
+            return barbas[i];
         }
     } 
     return "Barba não encontrada";
 }
 
-
 function verificaStatusBarbearia() {
-    if (barbearia.estaAberto) {
-        return "Estamos abertos"
-    } return "Estamos fechados"
+    return barbearia.estaAberto ? "Estamos abertos" : "Estamos fechados";
 }
 
 function retornaTodosCortes() {
-    return cortes
+    return barbearia.cortes;
 }
 
 function retornaTodasBarbas() {
-    return barbas
+    return barbearia.barbas;
 }
 
 function criaPedido(nomeCliente, corteId, barbaId) {
-
-    const corte = buscaCortePorId(corteId)
-    const barba = buscaBarbaPorId(barbaId)
+    const corte = buscaCortePorId(corteId);
+    const barba = buscaBarbaPorId(barbaId);
 
     const pedido = {
-    nome: nomeCliente,
-    pedidoCorte: corte.tipo,
-    pedidoCortePreco: corte.valor,
-    pedidoBarba: barba.tipo,
-    pedidoBarbaPreco: barba.valor
-    }
+        nome: nomeCliente,
+        pedidoCorte: corte.tipo,
+        pedidoCortePreco: corte.valor,
+        pedidoBarba: barba.tipo,
+        pedidoBarbaPreco: barba.valor
+    };
 
-    return pedido
+    return pedido;
 }
 
+function atualizarServico(lista, id, novoValor, novoTipo) {
+    for (const item of lista) {
+        if (item.id === id) {
+            item.tipo = novoTipo;
+            item.valor = novoValor;
 
-
-function atualizarServico(lista, id, valor, tipo) {
-   
+            return lista
+        }
+    }
+    return lista
 }
 
 function calculaTotal(pedido) {
-    return pedido.pedidoBarbaPreco + pedido.pedidoCortePreco
+    return pedido.pedidoCortePreco + pedido.pedidoBarbaPreco;
 }
